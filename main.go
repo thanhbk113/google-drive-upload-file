@@ -29,6 +29,7 @@ func UploadFile() gin.HandlerFunc {
 			})
 			return
 		}
+
 		path, err := util.CreateFile(file)
 		if err != nil {
 			fmt.Println(err)
@@ -36,6 +37,9 @@ func UploadFile() gin.HandlerFunc {
 				"message": "Error",
 			})
 		}
+
+		//Resize image
+		// util.ResizeAndSaveImage(path, 400, 400)
 
 		//Upload to google drive
 		dir, _ := os.Getwd()
@@ -61,7 +65,7 @@ func UploadFile() gin.HandlerFunc {
 		}
 
 		c.JSON(200, gin.H{
-			"url":     url,
+			// "url":     url,
 			"message": "Success",
 		})
 	}
